@@ -1,0 +1,17 @@
+{
+  "header": {
+    "works": "Works",
+    "about": "About",
+    "contact": "Contact",
+    "blog": "Blog",
+    "license": "Licence",
+    "policy": "Privacy & Policy",
+    "switchLanguage": "Switch Language"
+  },
+  "other": {
+    "comingSoon": "Coming Soon",
+    "page": "Page",
+    "waitText": "in the meantime, you can visit my profile below:",
+    "rightsText": "All Rights Reserved"
+  }
+}

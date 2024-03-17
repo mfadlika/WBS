@@ -1,0 +1,17 @@
+{
+  "header": {
+    "works": "Arbeiten",
+    "about": "Impressum",
+    "contact": "Kontakt",
+    "blog": "Blog",
+    "license": "Lizenz",
+    "policy": "Datenschutzrichtlinie",
+    "switchLanguage": "Sprache wechseln"
+  },
+  "other": {
+    "comingSoon": "Demnächst",
+    "page": "Seite",
+    "waitText": "in der Zwischenzeit können Sie mein Profil besuchen:",
+    "rightsText": "Alle Rechte vorbehalten"
+  }
+}

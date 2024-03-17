@@ -1,0 +1,17 @@
+{
+  "header": {
+    "works": "Karya",
+    "about": "Tentang",
+    "contact": "Kontak",
+    "blog": "Blog",
+    "license": "Lisensi",
+    "policy": "Kebijakan & Privasi",
+    "switchLanguage": "Ubah Bahasa"
+  },
+  "other": {
+    "comingSoon": "Segera Datang",
+    "page": "Halaman",
+    "waitText": "sementara waktu, silahkan kunjungi profil saya:",
+    "rightsText": "Hak Cipta Dilindungi"
+  }
+}
