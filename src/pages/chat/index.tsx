@@ -4,7 +4,7 @@ import { ProfileCard } from "@/lib/card";
 export default function Inbox() {
   return (
     <div className="flex">
-      <div className="inbox w-2/12 pt-16 px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
+      <div className="inbox w-6/12 xl:w-3/12 pt-16 px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul className="space-y-2">
           <List>
             <button className="w-full text-start py-4 pl-2 hover:bg-gray-100 dark:hover:bg-gray-700">

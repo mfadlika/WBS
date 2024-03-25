@@ -9,6 +9,8 @@ interface PostProps {
 
 export default function PostModal({ post, setPost }: PostProps) {
   const [isClicked, setIsClicked] = useState<boolean>(false);
+  const [value, setValue] = useState("Pilih Jenis Aduan");
+
   async function submitHandler(event: any) {
     event.preventDefault();
     postData(post);
@@ -54,7 +56,7 @@ export default function PostModal({ post, setPost }: PostProps) {
           <div className="relative bg-white rounded-lg shadow dark:bg-gray-600">
             <div className="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
               <h3 className="text-xl font-semibold text-gray-900 dark:text-white">
-                Post something cool
+                Kolom Aduan
               </h3>
               <button
                 type="button"
@@ -78,15 +80,36 @@ export default function PostModal({ post, setPost }: PostProps) {
               </button>
             </div>
 
+            <form className="max-w-sm ml-7">
+              <label htmlFor="underline_select" className="sr-only">
+                Underline select
+              </label>
+              <select
+                id="underline_select"
+                className="block py-2.5 px-0 w-full text-sm text-gray-500 bg-transparent border-0 border-b-2 border-gray-200 appearance-none dark:text-gray-400 dark:border-gray-700 focus:outline-none focus:ring-0 focus:border-gray-200 peer"
+                value={value}
+                onChange={(e) => {
+                  setValue(e.target.value);
+                }}
+              >
+                <option>Pilih jenis aduan</option>
+                <option value="US">Pelanggaran dan Kecurangan Akademik</option>
+                <option value="CA">Diskriminasi SARA</option>
+                <option value="FR">Pelecehan Seksual</option>
+                <option value="DE">Lainnya</option>
+              </select>
+            </form>
+
             <div className="p-6 space-y-6">
               <Form onSubmit={submitHandler}>
                 <TextArea
                   row={8}
                   col={50}
-                  placeholder="Post something cool"
+                  placeholder="Ketik pesan anda"
+                  label="Pesan aduan"
                 ></TextArea>
                 <Button
-                  value="Post"
+                  value="Kirim"
                   type="submit"
                   className="w-full text-white dark:text-black bg-rose-500"
                 />

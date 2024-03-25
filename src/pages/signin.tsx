@@ -38,29 +38,21 @@ export default function signin() {
                 value={password}
                 onChange={setPassword}
               />
-              <div className="flex items-center justify-between">
-                <CheckBox label="Remember me" />
-                <Link
-                  href="#"
-                  className="text-sm font-medium text-primary-600 hover:underline dark:text-primary-500"
-                >
-                  Forgot password?
-                </Link>
-              </div>
+
               <Button
                 value="Sign In"
                 type="submit"
                 className="w-full text-white dark:text-black bg-rose-500"
               />
-              <Text>
-                Don’t have an account yet?{" "}
+
+              <div>
                 <Link
-                  href="signup"
+                  href="forgot"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
-                  Sign up
+                  Forgot password?{" "}
                 </Link>
-              </Text>
+              </div>
             </Form>
           </div>
         </Box>
