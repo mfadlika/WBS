@@ -29,7 +29,7 @@ export default async function signupAPI(
 export async function signinAPI(username: string, password: string) {
   const data = axios
     .post(
-      "http://localhost:8000/api/account/signin",
+      "http://localhost:5000/api/user/signin",
       { data: { username: username, password: password } },
       {
         headers: {
@@ -54,7 +54,7 @@ export async function signinAPI(username: string, password: string) {
 export async function getData() {
   var data;
   await axios
-    .get("http://localhost:8000/api/account/index", {
+    .get("http://localhost:5000/api/account/index", {
       headers: {
         "Content-Type": "application/json",
         Authorization: localStorage.getItem("token"),
@@ -73,7 +73,7 @@ export async function getData() {
 export async function postData(post: string) {
   axios
     .post(
-      "http://localhost:8000/api/account/index",
+      "http://localhost:5000/api/account/index",
       { post: post },
       {
         headers: {

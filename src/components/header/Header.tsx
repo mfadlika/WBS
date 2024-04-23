@@ -102,13 +102,6 @@ export default function Header(props: LayoutProps): ReactElement {
                         className="text-sm rounded-none"
                         role="menuitem"
                       >
-                        Earnings
-                      </NavLink>
-                      <NavLink
-                        href="#"
-                        className="text-sm rounded-none"
-                        role="menuitem"
-                      >
                         Sign out
                       </NavLink>
                     </List>
@@ -135,21 +128,31 @@ export default function Header(props: LayoutProps): ReactElement {
                 <span className="flex-1 ml-3 whitespace-nowrap">Home</span>
               </NavLink>
 
-              <NavLink href="chat">
+              {/* <NavLink href="chat">
                 {Icon.inbox}
                 <span className="flex-1 ml-3 whitespace-nowrap">Chat</span>
                 <span className="inline-flex items-center justify-center w-3 h-3 p-3 ml-3 text-sm font-medium text-blue-800 bg-blue-100 rounded-full dark:bg-blue-900 dark:text-blue-300">
                   3
                 </span>
-              </NavLink>
+              </NavLink> */}
 
-              <NavLink href="/signin">
+              <NavLink
+                className={pathname == "/admin" ? "hidden" : ""}
+                href="/signin"
+              >
                 {Icon.signIn}
                 <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
               </NavLink>
             </List>
+            <div className="flex mt-8">
+              <ToggleButton
+                value="Dark Mode"
+                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+                params={theme === "light" ? false : true}
+              ></ToggleButton>
+            </div>
 
-            <Box>
+            {/* <Box>
               <p className="text-center max-w-xl mb-5 font-bold leading-tight tracking-tight text-black dark:text-white">
                 Switch Language
               </p>
@@ -171,14 +174,7 @@ export default function Header(props: LayoutProps): ReactElement {
                   </Link>
                 </button>
               </div>
-            </Box>
-            <div className="flex justify-center mt-8">
-              <ToggleButton
-                value="Dark Mode"
-                onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-                params={theme === "light" ? false : true}
-              ></ToggleButton>
-            </div>
+            </Box> */}
           </ul>
         </div>
       </aside>

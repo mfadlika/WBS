@@ -1,6 +1,9 @@
 import React, { Dispatch, SetStateAction, useState } from "react";
 import Form, { Button, Input, TextArea } from "@/lib/form";
 import { postData } from "@/pages/api/auth";
+import { usePathname } from "next/navigation";
+import { Console } from "console";
+import path from "path";
 
 interface PostProps {
   post: string;
@@ -10,6 +13,7 @@ interface PostProps {
 export default function PostModal({ post, setPost }: PostProps) {
   const [isClicked, setIsClicked] = useState<boolean>(false);
   const [value, setValue] = useState("Pilih Jenis Aduan");
+  const pathname = usePathname();
 
   async function submitHandler(event: any) {
     event.preventDefault();
@@ -18,7 +22,11 @@ export default function PostModal({ post, setPost }: PostProps) {
   return (
     <div>
       <button
-        className="fixed z-50 bottom-8 right-8 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        className={
+          pathname == "/admin"
+            ? "hidden"
+            : "fixed z-50 bottom-8 right-8 block text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-full text-sm text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+        }
         type="button"
         onClick={() => setIsClicked(!isClicked)}
       >
