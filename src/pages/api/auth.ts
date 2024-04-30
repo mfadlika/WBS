@@ -1,29 +1,36 @@
 import axios from "axios";
 import Router from "next/router";
 import Cookies from "js-cookie";
+import { NextApiRequest, NextApiResponse } from "next";
 
-export default async function signupAPI(
-  email: string,
-  username: string,
-  password: string
+export default async function handler(
+  req: NextApiRequest,
+  res: NextApiResponse
 ) {
-  const data = axios({
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    data: { email: email, username: username, password: password },
-    url: "http://localhost:8000/api/account/signup",
-    xsrfCookieName: "csrftoken",
-    xsrfHeaderName: "X-CSRFTOKEN",
-    withCredentials: true,
-  })
-    .then(() => Router.push("/"))
-    .catch((error) => {
-      console.log(error);
-      return error;
-    });
-  return data;
+  // const data = axios({
+  //   method: "POST",
+  //   headers: {
+  //     "Content-Type": "application/json",
+  //   },
+  //   data: { username: username, password: password },
+  //   url: "http://localhost:8000/api/account/signup",
+  //   xsrfCookieName: "csrftoken",
+  //   xsrfHeaderName: "X-CSRFTOKEN",
+  //   withCredentials: true,
+  // })
+  //   .then(() => Router.push("/"))
+  //   .catch((error) => {
+  //     console.log(error);
+  //     return error;
+  //   });
+  // return data;
+  const { username, password } = req.body;
+  console.log(username);
+  try {
+    if (username == "admin" && password == "admin") {
+      res.status(200).json({ success: true });
+    }
+  } catch (error) {}
 }
 
 export async function signinAPI(username: string, password: string) {

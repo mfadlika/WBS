@@ -3,10 +3,11 @@ import Form, { Button, CheckBox, Input } from "@/lib/form";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
 import Link from "next/link";
-import { useState } from "react";
-import { signinAPI } from "./api/auth";
+import { FormEvent, useState } from "react";
+import signupAPI, { signinAPI } from "./api/auth";
 import { NavLink } from "@/lib/link";
 import { useRouter } from "next/router";
+import { NextApiRequest, NextApiResponse } from "next";
 
 export default function signin() {
   const [userName, setUserName] = useState<string>("");
@@ -16,12 +17,25 @@ export default function signin() {
     router.push(name);
   };
 
-  async function submitHandler(event: any) {
+  async function submitHandler(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     if (userName == "admin" && password == "admin") {
       navigate("/admin");
     }
-    // await signinAPI(userName, password);
+
+    // const response = await fetch("http://localhost:3000/api/auth/", {
+    //   method: "POST",
+    //   headers: { "Content-Type": "application/json" },
+    //   body: JSON.stringify({ userName, password }),
+    // });
+
+    // if (response.ok) {
+    //   console.log("hello");
+    //   router.push("/profile");
+    // } else {
+    //   // Handle errors
+    //   console.log("error");
+    // }
   }
   return (
     <section className="bg-gray-50 dark:bg-gray-900">

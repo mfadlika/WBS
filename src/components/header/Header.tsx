@@ -136,12 +136,14 @@ export default function Header(props: LayoutProps): ReactElement {
                 </span>
               </NavLink> */}
 
-              <NavLink
-                className={pathname == "/admin" ? "hidden" : ""}
-                href="/signin"
-              >
-                {Icon.signIn}
-                <span className="flex-1 ml-3 whitespace-nowrap">Sign In</span>
+              <NavLink href={"/signin"}>
+                <span className={pathname == "/admin" ? "rotate-180" : ""}>
+                  {Icon.signIn}
+                </span>
+
+                <span className="flex-1 ml-3 whitespace-nowrap">
+                  {pathname == "/admin" ? "Sign Out" : "Sign In"}
+                </span>
               </NavLink>
             </List>
             <div className="flex mt-8">

@@ -1,52 +1,73 @@
+import PostCard from "@/components/PostCard";
 import PostModal from "@/components/PostModal";
 import Card from "@/lib/card";
 import { GetStaticProps } from "next";
 import { serverSideTranslations } from "next-i18next/serverSideTranslations";
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 
 interface Messages {
   id: number;
   name: string;
   date: string;
   message: string;
-  status: string;
+  status: number;
+  rating: number;
 }
 [];
 
+const postMessage: Messages[] = [
+  {
+    id: 1,
+    name: "Lisa",
+    date: "13 Mei 2023",
+    message: "Help me!",
+    status: 1,
+    rating: 2,
+  },
+  {
+    id: 2,
+    name: "Klee",
+    date: "12 Mei 2023",
+    message: "Help me!",
+    status: 2,
+    rating: 2,
+  },
+  {
+    id: 3,
+    name: "Venti",
+    date: "10 Mei 2023",
+    message: "Help me!!!!!",
+    status: 1,
+    rating: 1,
+  },
+  {
+    id: 4,
+    name: "Wanderer",
+    date: "8 Mei 2023",
+    message: "Help me!!!!!!!",
+    status: 3,
+    rating: 2,
+  },
+];
+
 export default function Home(): ReactElement {
   const [post, setPost] = useState<string>("");
-  const [section, setSection] = useState<string>("new");
+  const [section, setSection] = useState<number>(1);
+  const [mes, setMes] = useState<number>();
 
-  const postMessage: Messages[] = [
-    {
-      id: 1,
-      name: "Lisa",
-      date: "13 Mei 2023",
-      message: "Help me!",
-      status: "new",
-    },
-    {
-      id: 2,
-      name: "Klee",
-      date: "12 Mei 2023",
-      message: "Help me!",
-      status: "doing",
-    },
-    {
-      id: 3,
-      name: "Venti",
-      date: "10 Mei 2023",
-      message: "Help me!!!!!",
-      status: "new",
-    },
-    {
-      id: 4,
-      name: "Wanderer",
-      date: "8 Mei 2023",
-      message: "Help me!!!!!!!",
-      status: "done",
-    },
-  ];
+  const moveForward = async (option: Messages) => {
+    option.status += 1;
+    setMes(option.status);
+  };
+
+  const moveBack = async (option: Messages) => {
+    option.status -= 1;
+    setMes(option.status);
+  };
+
+  useEffect(() => {
+    console.log(mes);
+  }, []);
 
   return (
     <div className="pt-14">
@@ -59,7 +80,7 @@ export default function Home(): ReactElement {
         >
           <li className="w-full">
             <button
-              onClick={() => setSection("new")}
+              onClick={() => setSection(1)}
               id="stats-tab"
               data-tabs-target="#stats"
               type="button"
@@ -73,7 +94,7 @@ export default function Home(): ReactElement {
           </li>
           <li className="w-full">
             <button
-              onClick={() => setSection("doing")}
+              onClick={() => setSection(2)}
               id="about-tab"
               data-tabs-target="#about"
               type="button"
@@ -87,7 +108,7 @@ export default function Home(): ReactElement {
           </li>
           <li className="w-full">
             <button
-              onClick={() => setSection("done")}
+              onClick={() => setSection(3)}
               id="faq-tab"
               data-tabs-target="#faq"
               type="button"
@@ -102,45 +123,52 @@ export default function Home(): ReactElement {
         </ul>
 
         <div className="p-5 border border-gray-100 rounded-lg bg-gray-50 dark:bg-gray-800 dark:border-gray-700">
-          {/* <time className="text-lg font-semibold text-gray-900 dark:text-white">
-            January 12th, 2022
-          </time> */}
-
           <ol className="mt-3 divide-y divider-gray-200 dark:divide-gray-700">
-            {postMessage.map((option: Messages, index: number) => {
-              if (option.status != section) {
-                return;
-              }
-              return (
-                <li key={option.id}>
-                  <a
-                    href={"/" + option.id}
-                    className="items-center block p-3 sm:flex hover:bg-gray-100 dark:hover:bg-gray-700"
-                  >
-                    <img
-                      className="mr-4 w-12 h-12 mb-3 me-3 rounded-full sm:mb-0"
-                      src=""
-                      alt="image"
-                    />
-                    <div className="text-gray-600 dark:text-gray-400">
-                      <div className="text-base font-normal">
-                        <span className="font-medium text-gray-900 dark:text-white">
-                          {option.name}
-                        </span>
+            {postMessage
+              .sort((a: Messages, b: Messages) =>
+                section == 1 ? a.id - b.id : a.rating - b.rating
+              )
+              .map((option: Messages, index: number) => {
+                if (option.status != section) {
+                  return;
+                }
+                return (
+                  <div key={option.id}>
+                    <li>
+                      <PostCard message={option}></PostCard>
+                      <div className="justify-center">
+                        <button
+                          className={
+                            option.status == 1
+                              ? "hidden"
+                              : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded-full"
+                          }
+                          onClick={() => {
+                            moveBack(option);
+                          }}
+                        >
+                          Move Back
+                        </button>
+                        <button
+                          className={
+                            option.status == 3
+                              ? "hidden"
+                              : "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 m-1 rounded-full"
+                          }
+                          onClick={() => {
+                            moveForward(option);
+                          }}
+                        >
+                          Move Forward
+                        </button>
                       </div>
-                      <div className="text-sm font-normal">
-                        {option.message}
-                      </div>
-                    </div>
-                  </a>
-                </li>
-              );
-            })}
+                    </li>
+                  </div>
+                );
+              })}
           </ol>
         </div>
       </div>
-
-      <PostModal post={post} setPost={setPost}></PostModal>
     </div>
   );
 }
